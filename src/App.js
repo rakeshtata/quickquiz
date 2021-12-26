@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import QuestionList from './Components/QuestionList'
+import Scorebox from './Components/ScoreBox'
+import Results from './Components/Results'
+import questions from './questions'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () => {
+
+  const [score, setScore] = useState(0)
+  const [current, setCurrent] = useState(1)
+
+
+  return(
+    <div>
+      {current > questions.length && <Results 
+      score = {score} 
+      current = {current}
+      questions = {questions} />}
+
+      <QuestionList 
+      score = {score} 
+      current = {current}
+      questions = {questions}
+      setCurrent={setCurrent}
+      setScore={setScore} />
+
+      {current <= questions.length && <Scorebox 
+      score = {score} 
+      current = {current}
+      questions = {questions}  />}
     </div>
-  );
+  )
+	
 }
 
-export default App;
+export default App
